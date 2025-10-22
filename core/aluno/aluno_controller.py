@@ -1,18 +1,21 @@
 from flask import Blueprint, request , jsonify
 from core.aluno.aluno_service import AlunoService
 from core.aluno.aluno import Aluno
+from core.autenticacao.autenticacao import autenticacao
 
 aluno_service = AlunoService()
 
 aluno_controller = Blueprint('aluno',__name__, url_prefix= '/alunos')
 
 @aluno_controller.route('/', methods=['GET'])
+@autenticacao
 def listar_alunos():
     alunos = aluno_service.listar_alunos()
     return jsonify(alunos)
 
 
 @aluno_controller.route ( '/', methods = ['POST'])
+@autenticacao
 def adicionar_aluno():
     dados = request.get_json()
     obj_aluno = Aluno(0, dados["nome"], idade=dados["idade"], cpf=dados["cpf"])
@@ -21,6 +24,7 @@ def adicionar_aluno():
 
 
 @aluno_controller.route("/<int:id>", methods=['GET'])
+@autenticacao
 def obter_aluno(id):
     aluno = aluno_service.obter_aluno_por_id(id)
     if aluno:
