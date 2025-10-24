@@ -1,13 +1,13 @@
 from flask import Flask
 from core.aluno.aluno_controller import aluno_controller
-from core.usuario.usuario_controller import controller
+from core.usuario.usuario_controller import usuario_controller
 
 
 app = Flask(__name__)
 
 
 app.register_blueprint(aluno_controller)
-app.register_blueprint(controller)
+app.register_blueprint(usuario_controller)
 
 
 if __name__=="__main__":
