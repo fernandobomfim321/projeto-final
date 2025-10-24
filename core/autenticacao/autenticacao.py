@@ -1,3 +1,9 @@
+import base64
+from functools import wraps
+from flask import request, jsonify
+
+from core.usuario.usuario_service import UsuarioService
+
 def autenticacao(f):
     @wraps(f)
     def decorated(*args, **kwargs):

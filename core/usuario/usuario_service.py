@@ -1,9 +1,9 @@
-from core.usuario.usuario_repository import AlunoRepository
+from core.usuario.usuario_repository import UsuarioRepository
 from core.usuario.usuario  import Usuario
 
 class UsuarioService:
     def __init__(self):
-        self.repository = AlunoRepository()
+        self.repository = UsuarioRepository()
 
     def listar_usuarios(self): 
         return self.repository.listar()
@@ -14,7 +14,7 @@ class UsuarioService:
         else:
             return None
         
-    def atualizar_aluno(self, usuario):
+    def atualizar_usuario(self, usuario):
         if isinstance(usuario,usuario):
             if usuario.id > 0:
                 return self.repository.atualizar(usuario)
@@ -29,9 +29,11 @@ class UsuarioService:
         else:
             return {'id':usuario_id, "removido": True}
         
-    def obter_usuario_por_id(self, aluno_id):
+    def obter_usuario_por_id(self, usuario_id):
         usuario = self.repository.obter_por_id(usuario_id)
         if not usuario:
             return None
         else:
             return usuario 
+        
+    def obter_usuario_por_usuario_senha
