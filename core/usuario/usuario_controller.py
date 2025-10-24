@@ -4,14 +4,14 @@ from core.usuario.usuario import Usuario
 
 service = UsuarioService()
 
-controller = Blueprint('usuario', __name__, url_prefix='/usuarios')
+usuario_controller = Blueprint('usuario', __name__, url_prefix='/usuarios')
 
-@controller.route('/', methods=['GET'])
+@usuario_controller.route('/', methods=['GET'])
 def listar():
     objeto = service.listar_usuarios()
     return jsonify(objeto)
 
-@controller.route('/', methods=['POST'])
+@usuario_controller.route('/', methods=['POST'])
 def adicionar():
     dados = request.get_json()
     obj = Usuario(id=0, usuario=dados["usuario"],
@@ -20,7 +20,7 @@ def adicionar():
     objeto = service.adicionar_usuario(obj)
     return jsonify(objeto), 201
 
-@controller.route('/<int:id>', methods=['GET'])
+@usuario_controller.route('/<int:id>', methods=['GET'])
 def obter(id):
     objeto = service.obter_usuario_por_id(id)
     if objeto:
@@ -28,12 +28,12 @@ def obter(id):
     else:
         return jsonify({"erro": "Usuario não encontrado"}), 404
 
-@controller.route('/<int:id>', methods=['DELETE'])    
+@usuario_controller.route('/<int:id>', methods=['DELETE'])    
 def remover(id):
     sucesso = service.remover_usuario(id)
     return jsonify(sucesso)
 
-@controller.route('/', methods=['PUT'])
+@usuario_controller.route('/', methods=['PUT'])
 def atualizar():
     dados = request.get_json()
     obj = Usuario(id=dados["id"], usuario=dados["usuario"],
